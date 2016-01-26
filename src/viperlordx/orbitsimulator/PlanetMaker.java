@@ -56,13 +56,13 @@ public class PlanetMaker extends JFrame {
 		this.add(red);
 		
 		JFormattedTextField blue = new JFormattedTextField(rgbFormat);
-		blue.setBounds(166, 30, 166, 30);
+		blue.setBounds(332, 30, 166, 30);
 		blue.setToolTipText("Blue");
 		blue.setVisible(true);
 		this.add(blue);
 		
 		JFormattedTextField green = new JFormattedTextField(rgbFormat);
-		green.setBounds(332, 30, 166, 30);
+		green.setBounds(166, 30, 166, 30);
 		green.setToolTipText("Green");
 		green.setVisible(true);
 		this.add(green);

@@ -31,9 +31,10 @@ public class Body {
 		if (!frozen) {
 			synchronized (plane.lock) {
 				for (Body body : plane.getBodies()) {
-					if (body != this && body.getMass() <= mass && body.getCenter().distanceTo(this.getCenter()) < this.getDiameter() / 1.5) {
+					if (body != this && body.getMass() <= mass && body.getCenter().distanceTo(this.getCenter()) < this.getDiameter()) {
 						this.mass += body.getMass();
 						body.remove();
+						break;
 					}
 					if (body != this) {
 						double distance = location.distanceTo(body.getLocation());
