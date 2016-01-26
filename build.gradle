@@ -1,9 +1,5 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'application'
 
-repositories {
-	mavenCentral()
-}
-
-dependencies {
-}
+mainClassName = 'viperlordx.orbitsimulator.Main'
