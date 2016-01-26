@@ -27,7 +27,7 @@ public class Main {
 		frame.setLayout(null);
 		plane.setBounds(frame.getInsets().top, 0, 1000 - frame.getInsets().top, 1000);
 		plane.setBackground(Color.WHITE);
-		Body planet = new Body(40.0, new Location(300, 300), new Vector(1, -1), Color.GREEN, scheduler);
+		Body planet = new Body(40.0, new Location(300, 300), new Vector(3, -2), Color.GREEN, scheduler);
 		Body star = new Body(200.0, new Location(0, 0), new Vector(-1, 1), Color.YELLOW, scheduler);
 		plane.addBody(star);
 		plane.addBody(planet);
@@ -35,7 +35,7 @@ public class Main {
 		frame.setTitle("Orbit");
 		Location location = new Location(star.getLocation().x, star.getLocation().y);
 		location.addLocation(-500, -500);
-		plane.setCenter(location);;
+		plane.setCenter(location);
 		frame.setResizable(false);
 		frame.addKeyListener(new KeyListener() {
 			@Override
@@ -76,7 +76,7 @@ public class Main {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				if ((button == 3 || button == 2) && (!camera || plane.isFrozen())) {
-					Location end = new Location(e.getPoint());
+					Location end = new Location(Math.floor(e.getX()), Math.floor(e.getY()));
 					Location difference = end.subtractLocation(start.x, start.y);
 					plane.getCenter().subtractLocation(difference.x, difference.y);
 					start = new Location(e.getPoint());

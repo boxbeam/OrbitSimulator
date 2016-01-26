@@ -1,6 +1,7 @@
 package viperlordx.orbitsimulator;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -37,7 +38,8 @@ public class PlanetMaker extends JFrame {
 		velFormat.setMinimum(-100);
 		velFormat.setAllowsInvalid(false);
 		
-		this.setSize(500, 160);
+		this.setSize(new Dimension(500, 180));
+		this.setResizable(false);
 		this.setTitle("New body");
 		this.setLayout(null);
 		this.setLocationRelativeTo(null);
@@ -101,7 +103,6 @@ public class PlanetMaker extends JFrame {
 			}
 		});
 		this.add(submit);
-		
 		this.setVisible(true);
 		this.addWindowListener(new WindowAdapter() {
 			@Override

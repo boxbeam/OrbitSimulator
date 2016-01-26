@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Plane extends JPanel {
 	private boolean frozen = false;
+	public Object lock = new Object();
 	private HashSet<Body> bodies = new HashSet<Body>();
 	int ticksPerSecond = 30;
 	private Location center = new Location(-500, -500);
@@ -27,14 +28,15 @@ public class Plane extends JPanel {
 	}
 	@Override
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 5000, 5000);
-		if (bodies != null) {
-			for (Body body : bodies) {
-				g.setColor(body.getColor());
-				g.fillOval(body.getCenter().x - center.x, body.getCenter().y - center.y, body.getDiameter(),
-						body.getDiameter());
+		synchronized (lock) {
+			super.paintComponent(g);
+			g.setColor(Color.BLACK);
+			g.fillRect(0, 0, 5000, 5000);
+			if (bodies != null) {
+				for (Body body : bodies) {
+					g.setColor(body.getColor());
+					g.fillOval(body.getCenter().x - center.x, body.getCenter().y - center.y, body.getDiameter(), body.getDiameter());
+				}
 			}
 		}
 	}
@@ -42,8 +44,10 @@ public class Plane extends JPanel {
 		return bodies;
 	}
 	public void removeBody(Body body) {
-		bodies.remove(body);
-		this.repaint();
+		synchronized (lock) {
+			bodies.remove(body);
+			this.repaint();
+		}
 	}
 	public void setCenter(Location location) {
 		center = location;
@@ -62,19 +66,26 @@ public class Plane extends JPanel {
 	    return new Location(top_x/bottom, top_y/bottom);
 	}
 	public void setFrozen(boolean frozen) {
-		this.frozen = frozen;
-		for (Body body : bodies) {
-			body.setStatic(frozen);
+		synchronized (lock) {
+			this.frozen = frozen;
+			for (Body body : bodies) {
+				body.setStatic(frozen);
+			}
 		}
 	}
 	public boolean isFrozen() {
 		return frozen;
 	}
 	public Body getBodyAt(Location location) {
-		for (Body body : bodies) {
-			int radius = body.getDiameter();
-			if (body.getComponentLocation().distanceTo(location) < radius) {
-				return body;
+		synchronized (lock) {
+			for (Body body : bodies) {
+				double radius = body.getDiameter();
+				if (radius < 35) {
+					radius = 35;
+				}
+				if (body.getComponentLocation().distanceTo(location) <= radius) {
+					return body;
+				}
 			}
 		}
 		return null;
