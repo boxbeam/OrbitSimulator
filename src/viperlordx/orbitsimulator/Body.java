@@ -32,6 +32,9 @@ public class Body {
 			synchronized (plane.lock) {
 				for (Body body : plane.getBodies()) {
 					if (body != this && body.getMass() <= mass && body.getCenter().distanceTo(this.getCenter()) < this.getDiameter()) {
+						Vector diff = body.getVelocity();
+						diff.subtract(velocity).multiply(body.getMass() / mass, body.getMass() / mass);
+						velocity.add(diff);
 						this.mass += body.getMass();
 						body.remove();
 						break;

@@ -103,6 +103,7 @@ public class PlanetMaker extends JFrame {
 			}
 		});
 		this.add(submit);
+		this.setSize(submit.getX() + submit.getWidth(), submit.getY() + (submit.getHeight() * 2) + this.getInsets().top + this.getInsets().bottom);
 		this.setVisible(true);
 		this.addWindowListener(new WindowAdapter() {
 			@Override

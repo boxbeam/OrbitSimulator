@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Plane extends JPanel {
 	private boolean frozen = false;
+	double scale = 1;
 	public Object lock = new Object();
 	private HashSet<Body> bodies = new HashSet<Body>();
 	int ticksPerSecond = 30;
@@ -35,7 +36,7 @@ public class Plane extends JPanel {
 			if (bodies != null) {
 				for (Body body : bodies) {
 					g.setColor(body.getColor());
-					g.fillOval(body.getCenter().x - center.x, body.getCenter().y - center.y, body.getDiameter(), body.getDiameter());
+					g.fillOval((int) ((body.getCenter().x) / scale) - center.x, (int) ((body.getCenter().y) / scale) - center.y, (int) (body.getDiameter() / scale), (int) (body.getDiameter() / scale));
 				}
 			}
 		}
@@ -59,8 +60,8 @@ public class Plane extends JPanel {
 		double top_x = 0d, top_y = 0d;
 	    double bottom = 0d;
 	        for (Body a : bodies) {
-	        top_x += a.getMass() * a.getLocation().x;
-	        top_y += a.getMass() * a.getLocation().y;
+	        top_x += a.getMass() * a.getLocation().x / scale;
+	        top_y += a.getMass() * a.getLocation().y / scale;
 	        bottom += a.getMass();
 	    }
 	    return new Location(top_x/bottom, top_y/bottom);

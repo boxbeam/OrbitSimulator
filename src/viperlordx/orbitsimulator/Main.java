@@ -5,6 +5,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
 import javax.swing.JFrame;
 
@@ -78,11 +80,16 @@ public class Main {
 				if ((button == 3 || button == 2) && (!camera || plane.isFrozen())) {
 					Location end = new Location(Math.floor(e.getX()), Math.floor(e.getY()));
 					Location difference = end.subtractLocation(start.x, start.y);
-					plane.getCenter().subtractLocation(difference.x, difference.y);
+					plane.getCenter().subtractLocation(difference.x * plane.scale, difference.y * plane.scale);
 					start = new Location(e.getPoint());
 				}
 			}
+			@Override
+			public void mouseWheelMoved(MouseWheelEvent e) {
+				plane.scale += ((double) e.getWheelRotation()) / 10;
+			}
 		};
+		frame.addMouseWheelListener(adapter);
 		frame.addMouseListener(adapter);
 		frame.addMouseMotionListener(adapter);
 		scheduler.scheduleTask(new Runnable() {
