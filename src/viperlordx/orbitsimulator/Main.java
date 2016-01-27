@@ -6,14 +6,13 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 
 import javax.swing.JFrame;
 
 import viperlordx.orbitsimulator.scheduler.Scheduler;
 
 public class Main {
-	private static boolean camera = true;
+	private static boolean camera = false;
 	public static Plane plane;
 	public static JFrame frame;
 	public static Scheduler scheduler;
