@@ -78,13 +78,13 @@ public class Body {
 		velocity = vector;
 	}
 	public Location getCenter() {
-		Location center = new Location(location.x - (getDiameter()), location.y - (getDiameter()));
+		Location center = new Location(location.x - (getDiameter() * plane.scale), location.y - (getDiameter() * plane.scale));
 		return center;
 	}
 	public int getDiameter() {
 		double r = getMass() / Math.PI * 100;
 		r = Math.sqrt(r);
-		int radius = (int) Math.floor(r);
+		int radius = (int) Math.ceil(r);
 		return radius;
 	}
 	public void setStatic(boolean isStatic) {
@@ -99,10 +99,10 @@ public class Body {
 	}
 	public Location getComponentLocation() {
 		Location point = plane.getCenter().clone();
-		double cx = point.dx;
-		double cy = point.dy;
-		double x = location.dx;
-		double y = location.dy;
+		double cx = point.dx / plane.scale;
+		double cy = point.dy / plane.scale;
+		double x = location.dx / plane.scale;
+		double y = location.dy / plane.scale;
 		x -= cx + (getDiameter() / 2);
 		y -= cy;
 		return new Location(x, y);
