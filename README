@@ -6,3 +6,4 @@ Instructions:
 -Left click on a body while paused to remove it
 -Left click in an empty area while paused to create a body
   -Boxes (in order): Mass, R, G, B, X velocity, Y velocity (These will also display if you hover over the boxes)
+-Use scrool wheel to zoom in/out
