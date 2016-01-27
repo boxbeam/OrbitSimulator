@@ -78,6 +78,10 @@ public class Body {
 		velocity = vector;
 	}
 	public Location getCenter() {
+		Location center = new Location(location.x - (getDiameter()), location.y - (getDiameter()));
+		return center;
+	}
+	public Location getScaledCenter() {
 		Location center = new Location(location.x - (getDiameter() * plane.scale), location.y - (getDiameter() * plane.scale));
 		return center;
 	}
@@ -99,8 +103,8 @@ public class Body {
 	}
 	public Location getComponentLocation() {
 		Location point = plane.getCenter().clone();
-		double cx = point.dx / plane.scale;
-		double cy = point.dy / plane.scale;
+		double cx = point.dx;
+		double cy = point.dy;
 		double x = location.dx / plane.scale;
 		double y = location.dy / plane.scale;
 		x -= cx + (getDiameter() / 2);

@@ -79,7 +79,7 @@ public class Main {
 				if ((button == 3 || button == 2) && (!camera || plane.isFrozen())) {
 					Location end = new Location(Math.floor(e.getX()), Math.floor(e.getY()));
 					Location difference = end.subtractLocation(start.x, start.y);
-					plane.getCenter().subtractLocation(difference.x * plane.scale, difference.y * plane.scale);
+					plane.getCenter().subtractLocation(difference.x, difference.y);
 					start = new Location(e.getPoint());
 				}
 			}

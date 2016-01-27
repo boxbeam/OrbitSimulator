@@ -36,7 +36,7 @@ public class Plane extends JPanel {
 			if (bodies != null) {
 				for (Body body : bodies) {
 					g.setColor(body.getColor());
-					g.fillOval((int) (((body.getCenter().x) - center.x) / scale), (int) (((body.getCenter().y) - center.y) / scale), (int) (body.getDiameter() / scale), (int) (body.getDiameter() / scale));
+					g.fillOval((int) (((body.getCenter().x)) / scale) - center.x, (int) (((body.getCenter().y)) / scale) - center.y, (int) (body.getDiameter() / scale), (int) (body.getDiameter() / scale));
 				}
 			}
 		}
@@ -94,8 +94,8 @@ public class Plane extends JPanel {
 	}
 	public Location getPlaneLocation(Location point) {
 		Location center = getCenter().clone();
-		double x = center.dx + point.dx * scale;
-		double y = center.dy + point.dy * scale;
+		double x = (point.dx + center.x) * scale;
+		double y = (point.dy + center.y) * scale;
 		return new Location(x, y);
 	}
 }
