@@ -84,7 +84,7 @@ public class Plane extends JPanel {
 				Location loc = new Location(((body.getCenter().x - center.x + (body.getDiameter() / 2)) / scale) + 500, ((body.getCenter().y - center.y + (body.getDiameter() / 2)) / scale) + 500);
 				System.out.println(loc.x);
 				double radius = body.getDiameter();
-				if (loc.distanceTo(location) <= radius) {
+				if (loc.distanceTo(location) * scale <= radius) {
 					return body;
 				}
 			}
@@ -93,8 +93,8 @@ public class Plane extends JPanel {
 	}
 	public Location getPlaneLocation(Location point) {
 		Location center = getCenter().clone();
-		double x = ((point.dx + center.x + 500) * scale);
-		double y = ((point.dy + center.y + 500) * scale);
+		double x = ((point.dx + 500) * scale) + center.x;
+		double y = ((point.dy + 500) * scale) + center.y;
 		return new Location(x, y);
 	}
 	public Location getUnscaledPlaneLocation(Location point) {
