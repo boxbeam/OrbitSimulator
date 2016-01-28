@@ -35,7 +35,6 @@ public class Main {
 		frame.setVisible(true);
 		frame.setTitle("Orbit");
 		Location location = new Location(star.getLocation().x, star.getLocation().y);
-		location.addLocation(-500, -500);
 		plane.setCenter(location);
 		frame.setResizable(false);
 		frame.addKeyListener(new KeyListener() {
@@ -79,13 +78,13 @@ public class Main {
 				if ((button == 3 || button == 2) && (!camera || plane.isFrozen())) {
 					Location end = new Location(Math.floor(e.getX()), Math.floor(e.getY()));
 					Location difference = end.subtractLocation(start.x, start.y);
-					plane.getCenter().subtractLocation(difference.x, difference.y);
+					plane.getCenter().subtractLocation(difference.x * plane.scale, difference.y * plane.scale);
 					start = new Location(e.getPoint());
 				}
 			}
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent e) {
-				plane.scale += ((double) e.getWheelRotation()) / 10;
+				plane.scale += ((double) e.getWheelRotation()) / 5;
 			}
 		};
 		frame.addMouseWheelListener(adapter);
@@ -96,7 +95,6 @@ public class Main {
 			public void run() {
 				if (camera && !plane.isFrozen()) {
 					Location location = plane.getCenterOfMass();
-					location.addLocation(-500, -500);
 					plane.setCenter(location);
 				}
 			}

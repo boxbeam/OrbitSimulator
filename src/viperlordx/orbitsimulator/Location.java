@@ -39,6 +39,20 @@ public class Location {
 		this.y = (int) Math.round(dy);
 		return this;
 	}
+	public Location multiplyLocation(double x, double y) {
+		dx *= x;
+		dy *= y;
+		this.x = (int) Math.round(dx);
+		this.y = (int) Math.round(dy);
+		return this;
+	}
+	public Location divideLocation(double x, double y) {
+		dx /= x;
+		dy /= y;
+		this.x = (int) Math.round(dx);
+		this.y = (int) Math.round(dy);
+		return this;
+	}
 	public double distanceTo(Location other) {
 		double disx = other.dx - this.dx;
 		double disy = other.dy - this.dy;
