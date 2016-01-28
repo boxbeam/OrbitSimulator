@@ -36,7 +36,7 @@ public class Plane extends JPanel {
 			if (bodies != null) {
 				for (Body body : bodies) {
 					g.setColor(body.getColor());
-					g.fillOval((int) (((body.getCenter().x)  - center.x) / scale) + 500, (int) (((body.getCenter().y) - center.y) / scale) + 500, (int) (body.getDiameter() / scale), (int) (body.getDiameter() / scale));
+					g.fillOval((int) (((body.getCenter().x)  - center.x) / scale) + 500, (int) (((body.getCenter().y) - center.y) / scale) + 500, (int) Math.ceil(body.getDiameter() / scale), (int) Math.ceil(body.getDiameter() / scale));
 				}
 			}
 		}
@@ -83,8 +83,11 @@ public class Plane extends JPanel {
 			for (Body body : bodies) {
 				Location loc = new Location(((body.getCenter().x - center.x + (body.getDiameter() / 2)) / scale) + 500, ((body.getCenter().y - center.y + (body.getDiameter() / 2)) / scale) + 500);
 				System.out.println(loc.x);
-				double radius = body.getDiameter();
-				if (Math.floor(loc.distanceTo(location) * scale) <= radius) {
+				double radius = body.getExactDiameter();
+				if (radius < 35) {
+					radius = 35;
+				}
+				if (Math.floor(loc.distanceTo(location)) <= Math.ceil(radius / scale)) {
 					return body;
 				}
 			}

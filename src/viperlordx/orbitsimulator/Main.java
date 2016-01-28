@@ -12,7 +12,6 @@ import javax.swing.JFrame;
 import viperlordx.orbitsimulator.scheduler.Scheduler;
 
 public class Main {
-	private static boolean camera = false;
 	public static Plane plane;
 	public static JFrame frame;
 	public static Scheduler scheduler;
@@ -43,9 +42,6 @@ public class Main {
 				if (e.getKeyCode() == KeyEvent.VK_P) {
 					plane.setFrozen(!plane.isFrozen());
 				}
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					camera = !camera;
-				}
 			}
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -75,7 +71,7 @@ public class Main {
 			}
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				if ((button == 3 || button == 2) && (!camera || plane.isFrozen())) {
+				if ((button == 3 || button == 2)) {
 					Location end = new Location(Math.floor(e.getX()), Math.floor(e.getY()));
 					Location difference = end.subtractLocation(start.x, start.y);
 					plane.getCenter().subtractLocation(difference.x * plane.scale, difference.y * plane.scale);
@@ -90,14 +86,5 @@ public class Main {
 		frame.addMouseWheelListener(adapter);
 		frame.addMouseListener(adapter);
 		frame.addMouseMotionListener(adapter);
-		scheduler.scheduleTask(new Runnable() {
-			@Override
-			public void run() {
-				if (camera && !plane.isFrozen()) {
-					Location location = plane.getCenterOfMass();
-					plane.setCenter(location);
-				}
-			}
-		}, 1000 / Body.TICKS_PER_SECOND, true, false);
 	}
 }

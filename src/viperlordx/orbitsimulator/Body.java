@@ -90,6 +90,11 @@ public class Body {
 		int radius = (int) Math.ceil(r);
 		return radius;
 	}
+	public double getExactDiameter() {
+		double r = getMass() / Math.PI * 100;
+		r = Math.sqrt(r);
+		return r;
+	}
 	public void setStatic(boolean isStatic) {
 		this.frozen = isStatic;
 	}
