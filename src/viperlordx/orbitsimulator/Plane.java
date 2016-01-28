@@ -78,11 +78,13 @@ public class Plane extends JPanel {
 		return frozen;
 	}
 	public Body getBodyAt(Location location) {
+		System.out.println(location.x);
 		synchronized (lock) {
 			for (Body body : bodies) {
+				Location loc = new Location(((body.getCenter().x - center.x + (body.getDiameter() / 2)) / scale) + 500, ((body.getCenter().y - center.y + (body.getDiameter() / 2)) / scale) + 500);
+				System.out.println(loc.x);
 				double radius = body.getDiameter();
-				System.out.println(body.getComponentLocation().distanceTo(location));
-				if (body.getComponentLocation().distanceTo(location) <= radius) {
+				if (loc.distanceTo(location) <= radius) {
 					return body;
 				}
 			}

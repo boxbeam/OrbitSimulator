@@ -106,8 +106,8 @@ public class Body {
 		double cy = point.dy - 500;
 		double x = location.dx / plane.scale;
 		double y = location.dy / plane.scale;
-		x -= cx + (getDiameter() / 2);
-		y -= cy;
+		x -= cx + (getDiameter() / 2 / plane.scale);
+		y -= cy + (getDiameter() / 2 / plane.scale);
 		return new Location(x, y);
 	}
 }
