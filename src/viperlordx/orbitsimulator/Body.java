@@ -69,7 +69,6 @@ public class Body {
 		return location;
 	}
 	public void setLocation(Location location) {
-		this.location = location;
 	}
 	public Vector getVelocity() {
 		return velocity;

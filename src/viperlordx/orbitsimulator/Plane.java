@@ -78,14 +78,13 @@ public class Plane extends JPanel {
 		return frozen;
 	}
 	public Body getBodyAt(Location location) {
+		location = location.clone().subtractLocation(1000 * scale, 1000 * scale);
+		location.addLocation((center.x) / scale, (center.y) / scale);
 		synchronized (lock) {
 			for (Body body : bodies) {
 				double radius = body.getDiameter();
-				if (radius < 35) {
-					radius = 35;
-				}
-				radius = (int) Math.ceil(radius / scale);
-				if (body.getComponentLocation().distanceTo(location) <= radius) {
+				System.out.println(body.getScaledCenter().distanceTo(location));
+				if (body.getLocation().distanceTo(location) <= radius) {
 					return body;
 				}
 			}
@@ -94,14 +93,14 @@ public class Plane extends JPanel {
 	}
 	public Location getPlaneLocation(Location point) {
 		Location center = getCenter().clone();
-		double x = (point.dx + center.x) * scale;
-		double y = (point.dy + center.y) * scale;
+		double x = ((point.dx + center.x + 500) * scale);
+		double y = ((point.dy + center.y + 500) * scale);
 		return new Location(x, y);
 	}
 	public Location getUnscaledPlaneLocation(Location point) {
 		Location center = getCenter().clone();
-		double x = (point.dx + center.x);
-		double y = (point.dy + center.y);
+		double x = (point.dx + center.x) + (500 * scale);
+		double y = (point.dy + center.y) + (500 * scale);
 		return new Location(x, y);
 	}
 	public Location getComponentLocation(Location location) {
