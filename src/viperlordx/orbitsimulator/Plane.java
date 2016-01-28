@@ -84,7 +84,7 @@ public class Plane extends JPanel {
 				Location loc = new Location(((body.getCenter().x - center.x + (body.getDiameter() / 2)) / scale) + 500, ((body.getCenter().y - center.y + (body.getDiameter() / 2)) / scale) + 500);
 				System.out.println(loc.x);
 				double radius = body.getDiameter();
-				if (loc.distanceTo(location) * scale <= radius) {
+				if (Math.floor(loc.distanceTo(location) * scale) <= radius) {
 					return body;
 				}
 			}
