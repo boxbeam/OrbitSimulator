@@ -102,8 +102,8 @@ public class Body {
 	}
 	public Location getComponentLocation() {
 		Location point = plane.getCenter().clone();
-		double cx = point.dx;
-		double cy = point.dy;
+		double cx = point.dx - 500;
+		double cy = point.dy - 500;
 		double x = location.dx / plane.scale;
 		double y = location.dy / plane.scale;
 		x -= cx + (getDiameter() / 2);

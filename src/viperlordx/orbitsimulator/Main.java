@@ -61,7 +61,7 @@ public class Main {
 			public void mousePressed(MouseEvent e) {
 				button = e.getButton();
 				if (plane.isFrozen() && frame.isFocused() && e.getButton() == 1) {
-					Body body = plane.getBodyAt(plane.getPlaneLocation(new Location(e.getPoint())));
+					Body body = plane.getBodyAt(new Location(e.getPoint()));
 					if (body != null) {
 						new PlanetRemover(body);
 					} else {

@@ -95,7 +95,7 @@ public class PlanetMaker extends JFrame {
 					int vx = Integer.parseInt(toNumberString(xvel.getText()));
 					int vy = Integer.parseInt(toNumberString(yvel.getText()));
 					Vector velocity = new Vector(vx, vy);
-					Body body = new Body(bodyMass, Main.plane.getPlaneLocation(location), velocity, color, Main.scheduler);
+					Body body = new Body(bodyMass, Main.plane.getPlaneLocation(location).subtractLocation(1000, 1000), velocity, color, Main.scheduler);
 					Main.plane.addBody(body);
 					body.setStatic(Main.plane.isFrozen());
 					frame.dispose();
