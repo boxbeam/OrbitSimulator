@@ -39,6 +39,12 @@ public class Main {
 		frame.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					Body.ticksPerSecond++;
+				}
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					Body.ticksPerSecond++;
+				}
 				if (e.getKeyCode() == KeyEvent.VK_P) {
 					plane.setFrozen(!plane.isFrozen());
 				}

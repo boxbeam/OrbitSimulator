@@ -13,7 +13,7 @@ public class Body {
 	private Scheduler scheduler;
 	int task;
 	private boolean frozen;
-	public static final int TICKS_PER_SECOND = 40;
+	public static int ticksPerSecond = 40;
 	public Body(double mass, Location location, Vector velocity, Color color, Scheduler scheduler) {
 		this.mass = mass;
 		this.location = location;
@@ -25,7 +25,7 @@ public class Body {
 			public void run() {
 				moveTick();
 			}
-		}, 1000 / TICKS_PER_SECOND, true, false);
+		}, 1000 / ticksPerSecond, true, false);
 	}
 	private synchronized void moveTick() {
 		if (!frozen) {
@@ -42,7 +42,7 @@ public class Body {
 					if (body != this) {
 						double distance = location.distanceTo(body.getLocation());
 						distance /= 1;
-						Vector vector = new Vector(location, body.getLocation());
+						Vector vector = new Vector(location, body.getCenter().addLocation(body.getDiameter() / 2, body.getDiameter() / 2));
 						vector.divide(Math.pow(distance, 2), Math.pow(distance, 2));
 						vector.multiply(body.getMass() / 10, body.getMass() / 10);
 						velocity.add(vector);
