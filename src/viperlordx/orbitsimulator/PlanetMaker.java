@@ -34,8 +34,8 @@ public class PlanetMaker extends JFrame {
 		NumberFormat vel = NumberFormat.getIntegerInstance();
 		NumberFormatter velFormat = new NumberFormatter(vel);
 		velFormat.setValueClass(Integer.class);
-		velFormat.setMaximum(100);
-		velFormat.setMinimum(-100);
+		velFormat.setMaximum(1000);
+		velFormat.setMinimum(-1000);
 		velFormat.setAllowsInvalid(false);
 		
 		this.setSize(new Dimension(500, 180));
